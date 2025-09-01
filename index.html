@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Assistant</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                    <span class="logo-text">Teacher's Assistant</span>
+                </div>
+                <div class="nav-menu">
+                    <button class="nav-item active" data-tab="dashboard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        Dashboard
+                    </button>
+                    <button class="nav-item" data-tab="lessons">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                        Lessons
+                    </button>
+                    <button class="nav-item" data-tab="grading">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3 8-8"/>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.74 5.61 1.98"/>
+                        </svg>
+                        Grading
+                    </button>
+                    <button class="nav-item" data-tab="resources">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                        Resources
+                    </button>
+                    <button class="nav-item" data-tab="training">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1.07 1.55V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.55-1.07H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1.07-1.55V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.07 1.55 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.55 1.07H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.55 1.07z"/>
+                        </svg>
+                        Training
+                    </button>
+                </div>
+                <div class="nav-user">
+                    <div class="user-avatar">T</div>
+                    <span class="user-name">Teacher</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back! Here's an overview of your teaching activities.</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>24</h3>
+                            <p>Lesson Plans</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>156</h3>
+                            <p>Assignments Graded</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>42</h3>
+                            <p>Students</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon secondary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1.07 1.55V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.55-1.07H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1.07-1.55V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.07 1.55 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.55 1.07H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.55 1.07z"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>8</h3>
+                            <p>Training Modules</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-widgets">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h2>Recent Activities</h2>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon primary">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14,2 14,8 20,8"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Created lesson plan</strong> for Mathematics Grade 5</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon success">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 11l3 3 8-8"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Graded assignments</strong> for English Class A</p>
+                                    <span class="activity-time">4 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon secondary">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Downloaded resources</strong> for Science experiments</p>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h2>Class Performance Overview</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="performanceChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lessons Tab -->
+            <div id="lessons" class="tab-content">
+                <div class="page-header">
+                    <h1>Lesson Planning</h1>
+                    <p>Create CBC-aligned lesson plans with AI assistance</p>
+                </div>
+
+                <div class="lesson-generator">
+                    <div class="generator-form">
+                        <h2>AI Lesson Plan Generator</h2>
+                        <form id="lessonForm">
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="english">English</option>
+                                    <option value="science">Science</option>
+                                    <option value="social-studies">Social Studies</option>
+                                    <option value="kiswahili">Kiswahili</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade">Grade Level</label>
+                                <select id="grade" required>
+                                    <option value="">Select Grade</option>
+                                    <option value="1">Grade 1</option>
+                                    <option value="2">Grade 2</option>
+                                    <option value="3">Grade 3</option>
+                                    <option value="4">Grade 4</option>
+                                    <option value="5">Grade 5</option>
+                                    <option value="6">Grade 6</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="topic">Topic/Lesson Title</label>
+                                <input type="text" id="topic" placeholder="e.g., Addition and Subtraction" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">Lesson Duration (minutes)</label>
+                                <input type="number" id="duration" value="40" min="30" max="120">
+                            </div>
+                            <button type="submit" class="btn-primary">Generate Lesson Plan</button>
+                        </form>
+                    </div>
+
+                    <div class="lesson-output" id="lessonOutput">
+                        <div class="output-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                            </svg>
+                            <p>Your generated lesson plan will appear here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="saved-lessons">
+                    <h2>Recent Lesson Plans</h2>
+                    <div class="lesson-grid">
+                        <div class="lesson-card">
+                            <div class="lesson-header">
+                                <h3>Fractions Introduction</h3>
+                                <span class="lesson-subject">Mathematics - Grade 4</span>
+                            </div>
+                            <p class="lesson-description">Understanding basic fractions using visual aids and local materials</p>
+                            <div class="lesson-actions">
+                                <button class="btn-secondary">Edit</button>
+                                <button class="btn-secondary">Use</button>
+                            </div>
+                        </div>
+                        <div class="lesson-card">
+                            <div class="lesson-header">
+                                <h3>Animal Classification</h3>
+                                <span class="lesson-subject">Science - Grade 3</span>
+                            </div>
+                            <p class="lesson-description">Classifying animals found in local environment</p>
+                            <div class="lesson-actions">
+                                <button class="btn-secondary">Edit</button>
+                                <button class="btn-secondary">Use</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grading Tab -->
+            <div id="grading" class="tab-content">
+                <div class="page-header">
+                    <h1>Assessment & Grading</h1>
+                    <p>AI-powered grading assistance and performance analytics</p>
+                </div>
+
+                <div class="grading-tools">
+                    <div class="tool-card">
+                        <h2>Quick Grade Entry</h2>
+                        <form id="gradeForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="studentName">Student Name</label>
+                                    <input type="text" id="studentName" placeholder="Enter student name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="assignment">Assignment</label>
+                                    <input type="text" id="assignment" placeholder="Assignment title">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="score">Score</label>
+                                    <input type="number" id="score" min="0" max="100" placeholder="0-100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="totalMarks">Total Marks</label>
+                                    <input type="number" id="totalMarks" value="100" min="1">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Add Grade</button>
+                        </form>
+                    </div>
+
+                    <div class="performance-analytics">
+                        <h2>Class Performance Analytics</h2>
+                        <div class="analytics-grid">
+                            <div class="metric-card">
+                                <h3>Class Average</h3>
+                                <div class="metric-value">76.5%</div>
+                                <div class="metric-trend positive">↑ 3.2%</div>
+                            </div>
+                            <div class="metric-card">
+                                <h3>Passing Rate</h3>
+                                <div class="metric-value">85%</div>
+                                <div class="metric-trend positive">↑ 5%</div>
+                            </div>
+                            <div class="metric-card">
+                                <h3>At Risk Students</h3>
+                                <div class="metric-value">6</div>
+                                <div class="metric-trend negative">↑ 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-section">
+                            <h3>Performance Distribution</h3>
+                            <canvas id="gradeDistribution" width="600" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="student-list">
+                    <h2>Student Progress Tracking</h2>
+                    <div class="table-container">
+                        <table class="student-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Overall Grade</th>
+                                    <th>Recent Assignments</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTableBody">
+                                <tr>
+                                    <td>John Kamau</td>
+                                    <td><span class="grade-badge excellent">92%</span></td>
+                                    <td>
+                                        <div class="assignment-scores">
+                                            <span class="score">88</span>
+                                            <span class="score">95</span>
+                                            <span class="score">90</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge success">Excellent</span></td>
+                                    <td>
+                                        <button class="btn-sm">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mary Wanjiku</td>
+                                    <td><span class="grade-badge good">78%</span></td>
+                                    <td>
+                                        <div class="assignment-scores">
+                                            <span class="score">75</span>
+                                            <span class="score">82</span>
+                                            <span class="score">77</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge warning">Needs Support</span></td>
+                                    <td>
+                                        <button class="btn-sm">View Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources" class="tab-content">
+                <div class="page-header">
+                    <h1>Teaching Resources</h1>
+                    <p>Access digital textbooks, videos, and interactive materials</p>
+                </div>
+
+                <div class="resource-filters">
+                    <div class="filter-group">
+                        <label for="resourceGrade">Grade Level</label>
+                        <select id="resourceGrade">
+                            <option value="">All Grades</option>
+                            <option value="1">Grade 1</option>
+                            <option value="2">Grade 2</option>
+                            <option value="3">Grade 3</option>
+                            <option value="4">Grade 4</option>
+                            <option value="5">Grade 5</option>
+                            <option value="6">Grade 6</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="resourceSubject">Subject</label>
+                        <select id="resourceSubject">
+                            <option value="">All Subjects</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="english">English</option>
+                            <option value="science">Science</option>
+                            <option value="social-studies">Social Studies</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="resourceType">Resource Type</label>
+                        <select id="resourceType">
+                            <option value="">All Types</option>
+                            <option value="textbook">Digital Textbooks</option>
+                            <option value="video">Videos</option>
+                            <option value="interactive">Interactive</option>
+                            <option value="worksheet">Worksheets</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mathematics textbook">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Primary Mathematics Grade 4</h3>
+                            <p>CBC-aligned digital textbook with interactive exercises</p>
+                            <div class="resource-meta">
+                                <span class="resource-type">Textbook</span>
+                                <span class="resource-grade">Grade 4</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-primary">Download</button>
+                                <button class="btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.pexels.com/photos/8926558/pexels-photo-8926558.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Science experiments">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Simple Science Experiments</h3>
+                            <p>Video collection of experiments using local materials</p>
+                            <div class="resource-meta">
+                                <span class="resource-type">Video</span>
+                                <span class="resource-grade">Grades 3-5</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-primary">Download</button>
+                                <button class="btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.pexels.com/photos/267669/pexels-photo-267669.jpeg?auto=compress&cs=tinysrgb&w=400" alt="English worksheets">
+                        </div>
+                        <div class="resource-content">
+                            <h3>English Comprehension Worksheets</h3>
+                            <p>Printable worksheets for reading comprehension practice</p>
+                            <div class="resource-meta">
+                                <span class="resource-type">Worksheet</span>
+                                <span class="resource-grade">Grade 2</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-primary">Download</button>
+                                <button class="btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offline-status">
+                    <div class="offline-indicator">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span>8 resources available offline</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Tab -->
+            <div id="training" class="tab-content">
+                <div class="page-header">
+                    <h1>Professional Development</h1>
+                    <p>Enhance your teaching skills with interactive courses</p>
+                </div>
+
+                <div class="training-progress">
+                    <div class="progress-card">
+                        <h2>Your Learning Journey</h2>
+                        <div class="progress-stats">
+                            <div class="stat">
+                                <h3>5</h3>
+                                <p>Courses Completed</p>
+                            </div>
+                            <div class="stat">
+                                <h3>12</h3>
+                                <p>Badges Earned</p>
+                            </div>
+                            <div class="stat">
+                                <h3>240</h3>
+                                <p>Points</p>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <p class="progress-text">Level 3 Teacher (65% to Level 4)</p>
+                    </div>
+                </div>
+
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Classroom management">
+                        </div>
+                        <div class="course-content">
+                            <h3>Classroom Management in Large Classes</h3>
+                            <p>Learn effective strategies for managing overcrowded classrooms and maintaining student engagement.</p>
+                            <div class="course-meta">
+                                <span class="course-duration">45 min</span>
+                                <span class="course-level">Beginner</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                                <span>30% Complete</span>
+                            </div>
+                            <button class="btn-primary">Continue Course</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.pexels.com/photos/8926558/pexels-photo-8926558.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Technology in teaching">
+                        </div>
+                        <div class="course-content">
+                            <h3>Using Technology in Rural Classrooms</h3>
+                            <p>Maximize teaching effectiveness with minimal technology resources and offline tools.</p>
+                            <div class="course-meta">
+                                <span class="course-duration">60 min</span>
+                                <span class="course-level">Intermediate</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span>Not Started</span>
+                            </div>
+                            <button class="btn-primary">Start Course</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="https://images.pexels.com/photos/8923659/pexels-photo-8923659.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Assessment strategies">
+                        </div>
+                        <div class="course-content">
+                            <h3>CBC Assessment Strategies</h3>
+                            <p>Master competency-based assessment methods and align with new curriculum standards.</p>
+                            <div class="course-meta">
+                                <span class="course-duration">90 min</span>
+                                <span class="course-level">Advanced</span>
+                            </div>
+                            <div class="course-progress">
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                </div>
+                                <span>Completed</span>
+                            </div>
+                            <button class="btn-secondary">Review</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="badges-section">
+                    <h2>Your Teaching Badges</h2>
+                    <div class="badges-grid">
+                        <div class="badge-item earned">
+                            <div class="badge-icon">🏆</div>
+                            <h4>Lesson Master</h4>
+                            <p>Created 20+ lesson plans</p>
+                        </div>
+                        <div class="badge-item earned">
+                            <div class="badge-icon">📊</div>
+                            <h4>Assessment Pro</h4>
+                            <p>Graded 100+ assignments</p>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">🎯</div>
+                            <h4>Innovation Leader</h4>
+                            <p>Complete 10 training modules</p>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon">🌟</div>
+                            <h4>CBC Expert</h4>
+                            <p>Master CBC curriculum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p>Generating your lesson plan...</p>
+        </div>
+    </div>
+
+    <script src="src/scripts/app.js"></script>
+    <script src="src/scripts/charts.js"></script>
+    <script src="src/scripts/lessonGenerator.js"></script>
+</body>
+</html>
